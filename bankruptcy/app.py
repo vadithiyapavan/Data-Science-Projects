@@ -12,9 +12,10 @@ import streamlit as st
 
 from PIL import Image
 
-# Load the pre-trained classifier
-pickle_in = open("model_poly.pkl", "rb")
-classifier = pickle.load(pickle_in)
+# Assuming `model` is your trained model
+with open("model_poly.pkl", "wb") as f:
+    pickle.dump(model, f)
+
 
 def welcome():
     return "Welcome ALL"
