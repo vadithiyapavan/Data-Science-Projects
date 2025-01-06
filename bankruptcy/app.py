@@ -3,8 +3,10 @@ import pickle
 import streamlit as st
 
 # Load the pre-trained model
-pickle_in = open("model.pkl", "rb")
-classifier = pickle.load(pickle_in)
+# Save the Logistic Regression model to a pickle file
+pickle_out = open("model_poly.pkl", "wb")
+pickle.dump(lr, pickle_out)  # lr is your Logistic Regression model object
+pickle_out.close()
 
 def welcome():
     return "Welcome to the Bankruptcy Detection Model!"
