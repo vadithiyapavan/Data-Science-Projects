@@ -13,4 +13,4 @@ joblib
 types-PyYAML
 scipy
 streamlit
-pickel
+
