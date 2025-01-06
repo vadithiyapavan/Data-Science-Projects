@@ -13,8 +13,8 @@ import streamlit as st
 from PIL import Image
 
 # Assuming `model` is your trained model
-with open("model_poly.pkl", "wb") as f:
-    pickle.dump(model, f)
+pickle_in = open("model_poly.pkl","rb")
+classifier=pickle.load(pickle_in)
 
 
 def welcome():
