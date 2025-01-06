@@ -3,7 +3,7 @@ import pickle
 import streamlit as st
 
 # Load the pre-trained model
-pickle_in = open("model.pkl", "rb")
+pickle_in = open("knn.pkl", "rb")
 classifier = pickle.load(pickle_in)
 
 def welcome():
