@@ -3,8 +3,11 @@ import pickle
 import streamlit as st
 
 # Load the pre-trained model
-pickle_in = open("bankruptcy/knn.pkl", "rb")
-classifier = pickle.load(pickle_in)
+import pickle
+
+# Example: Saving a model
+with open("knn.pkl", "wb") as f:
+    pickle.dump(classifier, f)
 
 def welcome():
     return "Welcome to the Bankruptcy Detection Model!"
