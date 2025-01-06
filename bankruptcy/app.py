@@ -3,13 +3,8 @@ import pickle
 import streamlit as st
 
 # Load the pre-trained model
-import pickle
-try:
-    with open("model.pkl", "wb") as f:
-        pickle.dump(classifier, f)
-    print("Model saved successfully!")
-except Exception as e:
-    print(f"Error: {e}")
+pickle_in = open("knn.pkl", "rb")
+classifier = pickle.load(pickle_in)
 
 def welcome():
     return "Welcome to the Bankruptcy Detection Model!"
@@ -30,25 +25,34 @@ def main():
     
     # Styling for header
     html_temp = """
-    <div style="background-color:blue;padding:10px">
-    <h2 style="color:white;text-align:center;">Bankruptcy Detector</h2>
+    <div style="background-color:tomato;padding:10px">
+    <h2 style="color:white;text-align:center;">Streamlit Bankruptcy Detection ML App</h2>
     </div>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
-    industrial_risk = st.text_input("industrial_risk")
-    management_risk = st.text_input("management_risk")
-    financial_flexibility = st.text_input("financial_flexibility")
-    credibility = st.text_input("credibility")
-    competitiveness = st.text_input("competitiveness")
-    operating_risk = st.text_input("operating_risk")
-    result=""
-    if st.button("Predict"):
-        result=predict_bankruptcy(industrial_risk,management_risk,financial_flexibility,credibility,competitiveness,operating_risk)
-    st.success('The output is {}'.format(result))
-    if st.button("About"):
-        st.text("Lets LEarn")
-        st.text("Built with Streamlit")
+    # Input fields for the user to enter data
+    industrial_risk = st.number_input("Industrial Risk (0-1)", min_value=0.0, max_value=1.0, value=0.0)
+    management_risk = st.number_input("Management Risk (0-1)", min_value=0.0, max_value=1.0, value=0.0)
+    financial_flexibility = st.number_input("Financial Flexibility (0-1)", min_value=0.0, max_value=1.0, value=0.0)
+    credibility = st.number_input("Credibility (0-1)", min_value=0.0, max_value=1.0, value=0.0)
+    competitiveness = st.number_input("Competitiveness (0-1)", min_value=0.0, max_value=1.0, value=0.0)
+    operating_risk = st.number_input("Operating Risk (0-1)", min_value=0.0, max_value=1.0, value=0.0)
 
-if __name__=='__main__':
+    # Prediction output initialization
+    result = ""
+    
+    # Prediction button
+    if st.button("Predict"):
+        result = predict_bankruptcy(industrial_risk, management_risk, financial_flexibility, credibility, competitiveness, operating_risk)
+        
+    # Display result
+    st.success(f"The output is: {result}")
+
+    # About section
+    if st.button("About"):
+        st.text("This app helps detect bankruptcy using a Machine Learning model.")
+        st.text("Built with Streamlit and trained using KNN algorithm.")
+
+if __name__ == '__main__':
     main()
